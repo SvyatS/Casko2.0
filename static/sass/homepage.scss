@@ -1,0 +1,113 @@
+@import "nullstyle.scss";
+
+@font-face {
+	font-family: Monseratt; /* Имя шрифта */
+    src: url('../fonts/Montserrat-Light.ttf'); /* Путь к файлу со шрифтом */
+}
+
+body{
+	background: white;
+}
+
+h3{
+	font-size: 30px;
+	text-align: center;
+}
+
+.content{
+	font-family: Monseratt;
+	position: absolute;
+	background: #E1F9D8;
+	width: 80%;
+	left: 10%;
+	height: 100%;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #269926;
+	padding: 10px;
+}
+
+.user{
+	width: 100%;
+}
+
+.name{
+	display: inline-block;
+}
+
+.exit{
+	display: inline-block;
+	float: right;
+	text-decoration: underline;
+}
+
+.parent-menu{
+	padding: 50px;
+	text-align: center;
+}
+
+.row{
+	display: inline-flex;
+	align-items: center;
+}
+
+.elem{
+	padding: 0 15px;
+}
+
+.find-input{
+	border-radius: 6px;
+	width: 250px;
+	height: 30px;
+	font-size: 16px;
+	border: 1px solid #269926;
+	padding-left: 7px;
+}
+
+.new-payment{
+	display: inline-block;
+	background: #269926;
+	padding: 8px;
+	color: white;
+	font-size: 16px;
+	border-radius: 6px;
+}
+
+.delete-payment{
+	display: inline-block;
+	background: #269926;
+	padding: 6px;
+	color: white;
+	font-size: 16px;
+	border-radius: 6px;
+}
+
+.info-pay{
+	border-collapse: collapse;
+	font-size: 18px;
+	border: 1px solid #269926;
+	width: 100%;
+}
+
+.td-main-driver{
+	background: #269926;
+	color: white;
+	padding: 10px;
+	text-align: center;
+}
+
+.td-driver{
+	border: 1px solid #269926;
+	padding: 10px;
+	text-align: center;
+}
+
+.td-driver-check{
+	border: 1px solid #269926;
+	text-align: center;
+}
+
+.driver-checkbox{
+	display:inline-block;
+    width:21px;
+    height:21px;
+}

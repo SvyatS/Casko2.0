@@ -1,0 +1,57 @@
+// Файл обнуляющих стилей
+@import "nullstyle.scss";
+
+@font-face {
+	font-family: Monseratt; /* Имя шрифта */
+    src: url('../fonts/Montserrat-Light.ttf'); /* Путь к файлу со шрифтом */
+}
+
+body{
+	background: #8CCD90;
+}
+
+.login-form{
+	background: white;
+	border-radius: 10px;
+	position: absolute;
+    top: 15%;
+    left: 30%;
+    padding: 40px 20px;
+}
+
+input{
+	font-family: Monseratt;
+	border-bottom: 1px solid #525452;
+	width: 60%;
+}
+
+.form{
+	position: relative;
+	left: 20%;
+	padding: 30px 0;
+}
+
+.login-input{
+	margin: 30px 0;
+}
+
+.btn-form{
+	margin: 30px 0;
+}
+
+.but-login{
+	padding: 10px;
+	border-radius: 10px;
+	background: #269926;
+	transition: 0.5s;
+	font-family: Monseratt;
+	color: white;
+	font-size: 20px;
+	&:hover{
+		box-shadow: 0 0 15px #187A2E;
+	}
+
+	&:active{
+		background: #78DE8E;
+	}
+}

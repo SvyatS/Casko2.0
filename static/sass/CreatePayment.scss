@@ -1,0 +1,92 @@
+@import "nullstyle.scss";
+
+@font-face {
+	font-family: Monseratt; /* Имя шрифта */
+    src: url('../fonts/Montserrat-Light.ttf'); /* Путь к файлу со шрифтом */
+}
+
+body{
+	background: white;
+}
+
+h3{
+	font-size: 30px;
+	text-align: center;
+}
+
+.content{
+	font-family: Monseratt;
+	position: absolute;
+	background: #FBFBDC;
+	width: 80%;
+	left: 10%;
+	height: auto;
+	border-left: 1px solid #269926;
+	border-right: 1px solid #269926;
+	padding: 10px 30px;
+}
+
+.user{
+	text-align: right;
+}
+
+.category{
+	font-size: 25px;
+	color: #004d00;
+}
+.row{
+	display: inline-flex;
+	align-items: flex-end;
+}
+
+.elem{
+	padding: 25px;
+}
+
+.label-form{
+}
+
+.input-form{
+	margin-top: 10px;
+	padding-left: 7px;
+	height: 30px;
+	width: 200px;
+	border: 1px solid #269926;
+	border-radius: 7px;
+}
+
+.select-form{
+	margin-top: 10px;
+	padding-left: 12px;
+	border: 1px solid #269926;
+	border-radius: 7px;
+	font-size: 18px;
+	height: 30px;
+	width: 50px;
+}
+
+.btns-row{
+	justify-content:flex-end;
+	display: flex;
+	align-items: flex-end;
+	padding-bottom: 30px;
+}
+
+.elem-btn{
+	padding: 0 10px;
+}
+
+.btn-form{
+	border-radius: 5px;
+	padding: 10px;
+	background: #269926;
+	color: white;
+}
+
+.btn-form-cancel{
+	display: block;
+	border-radius: 7px;
+	padding: 12px;
+	background: #DC3232;
+	color: white;
+}

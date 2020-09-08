@@ -1,0 +1,63 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Журнал расчетов</title>
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+</head>
+<body>
+	{% if user.is_authenticated %}
+	<div class="content">
+		<div class="header">
+			<div class="user">
+				<div class="name">
+					Сотрудник: {{ user.get_username }}
+				</div>
+				<div class="exit">
+					<a href="{% url 'logout' %}?next=/login/">Выйти</a>
+				</div>
+			</div>
+			<h3>Страховой журнал</h3>
+			<div class="parent-menu">
+				<div class="row">
+					<div class="elem"><a href="{% url 'CreatePayment' %}" class="new-payment">Новый расчет</a></div>
+					<div class="elem"><input type="text" class="find-input" placeholder="Фамилия"></div>
+					<div class="elem"><button class="delete-payment">Пометить на удаление</button></div>
+				</div>
+			</div>
+		</div>
+		{% verbatim %}
+		<div class="payments">
+			<table class="info-pay" id="vue-table">
+				<tr>
+					<td class="td-main-driver"></td>
+					<td class="td-main-driver">Дата/Время</td>
+					<td class="td-main-driver">id</td>
+					<td class="td-main-driver">Клиент (Ф.И.О)</td>
+					<td class="td-main-driver">Марка+Модель</td>
+					<td class="td-main-driver">Статус</td>
+				</tr>
+			
+				<tr class="tr-driver" v-for="driver in drivers">
+					<td class="td-driver-check"><input type="checkbox" class="driver-checkbox"></td>
+					<td class="td-driver">{{ driver.date | formatDate }}</td>
+					<td class="td-driver">{{ driver.id }}</td>
+					<td class="td-driver">{{ driver.last_name }}
+          				{{ driver.first_name }}
+          				{{ driver.father_name }}</td>
+					<td class="td-driver">{{ driver.brand }}
+          				{{ driver.model }}</td>
+					<td class="td-driver">{{ driver.status }}</td>
+				</tr>
+			</table>
+		</div>
+		{% endverbatim %}
+	</div>
+	<script src="{% static 'vue/homepage.js' %}"></script>
+	{% endif %}
+</body>
+</html>

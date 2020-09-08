@@ -1,0 +1,206 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание записи</title>
+    <link rel="stylesheet" href="{% static 'css/CreatePayment.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+	{% if user.is_authenticated %}
+	<div class="content" id="payment-app" v-if='options'>
+		<div class="heading">
+			<h3>Страховой расчет</h3>
+		</div>
+		<div class="user">
+			Сотрудник: {{ user.get_username }}
+		</div>
+		<form action="{% url 'calculation' %}" method="POST"> 
+			{% csrf_token %}
+		<h4 class="category">Страхователь</h4>
+			<div class="row">
+				<div class="elem">
+					<label for="surname" class="label-form">Фамилия:</label>
+					<br>
+					<input type="text" class="input-form" id="surname"  v-model="last_name" value="{{ last_name }}" name="last_name">
+				</div>
+				<div class="elem">
+					<label for="name" class="label-form">Имя:</label>
+					<br>
+					<input type="text" class="input-form" id="name" v-model="first_name" value="{{ first_name }}" name="first_name">
+				</div>
+				<div class="elem">
+					<label for="father_name" class="label-form">Отчество:</label>
+					<br>
+					<input type="text" class="input-form" id="father_name" v-model="father_name" value="{{ father_name }}" name="father_name">
+				</div>
+			</div>
+
+		<h4 class="category">Транспортное средство</h4>
+			<div class="row">
+				<div class="elem">
+					<label for="brand" class="label-form">Марка:</label>
+					<br>
+					<input type="text" class="input-form" id="brand" v-model="brand">
+				</div>
+				<div class="elem">
+					<label for="model" class="label-form">Модель:</label>
+					<br>
+					<input type="text" class="input-form" id="model" v-model="model">
+				</div>
+				<div class="elem">
+					<label for="car_year" class="label-form">Год выпуска:</label>
+					<br>
+					<input type="number" class="input-form" id="car_year" v-model="car_year">
+				</div>
+				<div class="elem">
+					<label for="insurance_amount" class="label-form">Страховая сумма:</label>
+					<br>
+					<input type="number" class="input-form" id="insurance_amount" v-model="insurance_amount">
+				</div>
+				<div class="elem">
+					<label for="auto_class" class="label-form">Класс автомастерской:</label>
+					<br>
+						<select size="1" id="auto_class" class="select-form" v-model="auto_class">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+				</div>
+			</div>
+
+		<h4 class="category">Водители</h4>
+			<div class="row">
+				<div class="elem">
+					<label for="driver_year" class="label-form">Возвраст:</label>
+					<br>
+					<input type="text" class="input-form" id="driver_year" v-model="driver_year">
+				</div>
+				<div class="elem">
+					<label for="experience" class="label-form">Стаж:</label>
+					<br>
+					<input type="text" class="input-form" id="experience" v-model="experience">
+				</div>
+				<div class="elem">
+					<label for="num_drivers" class="label-form">Число водителей:</label>
+					<br>
+					<input type="number" class="input-form" id="num_drivers" v-model="num_drivers">
+				</div>
+				<div class="elem">
+					<label for="kbm" class="label-form">КБМ:</label>
+					<br>
+					<input type="number" class="input-form" id="kbm" v-model="kbm">
+				</div>
+			</div>
+
+		<h4 class="category">Страховые риски</h4>
+			<div class="row">
+				<div class="elem">
+					<input class="checkbox-form" type="checkbox" id="dtp_third_person" v-model="dtp_third_person">
+					<label for="dtp_third_person" class="label-form">ДТП по вине третьих лиц</label>
+				</div>
+				<div class="elem">
+					<input class="checkbox-form" type="checkbox" id="dtp_ts_person" v-model="dtp_ts_person">
+					<label for="dtp_ts_person" class="label-form">ДТП по вине водителей застрахованного ТС</label>
+				</div>
+				<div class="elem">
+					<input class="checkbox-form" type="checkbox" id="mechanic_damage" v-model="mechanic_damage">
+					<label for="mechanic_damage" class="label-form">Механические повреждения</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="elem">
+					<input class="checkbox-form" type="checkbox" id="damage_third_person" v-model="damage_third_person">
+					<label for="dtp_third_person" class="label-form">Противоправние действия третьих лиц</label>
+				</div>
+				<div class="elem">
+					<input class="checkbox-form" type="checkbox" id="grass" v-model="grass">
+					<label for="grass" class="label-form">Бой стекол ТС</label>
+				</div>
+				<div class="elem">
+					<input class="checkbox-form" type="checkbox" id="hijhacking" v-model="hijhacking">
+					<label for="hijhacking" class="label-form">Хищение</label>
+				</div>
+				<div class="elem">
+					<input class="checkbox-form check-all" type="checkbox" id="mechanic_damage">
+					<label for="mechanic_damage" class="label-form">выбрать все</label>
+				</div>
+			</div>
+
+		<h4 class="category">Варианты оплаты</h4>
+			<div class="row">
+				<div class="elem">
+					<label for="num_payments" class="label-form">Количество платежей:</label>
+					<br>
+					<input type="text" class="input-form" id="num_payments" v-model="num_payments">
+				</div>
+				<div class="elem">
+					<label for="insurance_term" class="label-form">Срок страхования<br>(месяцы):</label>
+					<br>
+					<input type="text" class="input-form" id="insurance_term" v-model="insurance_term">
+				</div>
+				<div class="elem">
+					<label for="kf_amount" class="label-form">Коэффициент соотношения<br>выплат к премиям:</label>
+					<br>
+					<input type="number" class="input-form" id="kf_amount" v-model="kf_amount">
+				</div>
+				<div class="elem">
+					<label for="anderight" class="label-form">Андеррайтерский<br>коэффициент:</label>
+					<br>
+					<input type="number" class="input-form" id="anderight" v-model="anderight">
+				</div>
+			</div>
+
+		<h4 class="category">Добровольное страхование гражданской ответсвенности</h4>
+			<div class="row">
+				<div class="elem">
+					<label for="insurance_amount_health" class="label-form">Страховая сумма:</label>
+					<br>
+					<select size="1" id="insurance_amount_health" class="select-form-widht" v-model="insurance_amount_health">
+						<option>100000</option>
+						<option>300000</option>
+						<option>500000</option>
+						<option>1000000</option>
+					</select>
+				</div>
+				<div class="elem">
+					<label for="osago" class="label-form">Страховая премия по ОСАГО:</label>
+					<br>
+					<input type="text" class="input-form" id="osago" v-model="osago">ы
+				</div>
+			</div>
+
+		<h4 class="category">Страхование гражданской ответственности</h4>
+			<div class="row">
+				<div class="elem">
+					<label for="insurance_sum" class="label-form">Страховая сумма:</label>
+					<br>
+					<input type="text" class="input-form" id="insurance_sum" v-model="insurance_sum">
+				</div>
+				<div class="elem">
+					<label for="model" class="label-form">Застрахованные посадочные места:</label>
+					<br>
+					<select size="1" id="places" class="select-form-widht" v-model="places">
+						<option>Водительское</option>
+						<option>Переднее правое</option>
+						<option>Оба передних</option>
+						<option>Все задние</option>
+						<option>Все</option>
+					</select>
+				</div>
+			</div>
+
+		<div class="btns-row">
+			<div class="elem-btn"><button type="submit" class="btn-form">Расчёт</button></div>
+			<div class="elem-btn"><button type="button" class="btn-form" id="save" name="SavePay" v-on:click="create_payment">Сохранить</button></div>
+			<div class="elem-btn"><a href="../../home/" class="btn-form-cancel">Отмена</a></div>
+		</div>
+		</form>	
+
+	</div>
+	<script type="text/javascript" src="{% static 'vue/CreateDriver.js' %}"></script>
+	{% endif %}
+</body>
+</html>
